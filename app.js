@@ -10,6 +10,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const GITHUB_WEBHOOK_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
 
+console.log(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, GITHUB_WEBHOOK_SECRET);
 app.use(bodyParser.json({
     verify: (req, res, buf, encoding) => {
         const signature = `sha256=${crypto
