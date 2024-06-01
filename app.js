@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const axios = require('axios');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 12345;
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
