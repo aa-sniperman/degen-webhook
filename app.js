@@ -32,6 +32,9 @@ app.post('/github-webhook', verifySignature, async (req, res) => {
     const githubEvent = req.headers['x-github-event'];
     const payload = req.body;
 
+    console.log('Received GitHub event:', githubEvent);
+    console.log('Payload:', JSON.stringify(payload, null, 2));
+
     const repoName = payload.repository.full_name;
     const pusherName = payload.pusher ? payload.pusher.name : 'N/A';
     const commitMessage = payload.head_commit ? payload.head_commit.message : 'No commit message';
@@ -64,6 +67,14 @@ app.post('/github-webhook', verifySignature, async (req, res) => {
         console.error('Error sending message to Telegram', error);
         res.status(500).send('Error processing event');
     }
+});
+
+app.use((err, req, res, next) => {
+    if (err) {
+        console.error(err.message);
+        return res.status(403).send('Request body was not signed or verification failed');
+    }
+    next();
 });
 
 app.listen(port, () => {
